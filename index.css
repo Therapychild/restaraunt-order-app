@@ -1,0 +1,153 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Smythe', cursive;
+    font-weight: 400;
+}
+
+h1 {
+    font-size: 39px;
+    line-height: 24px;
+    margin: 0 0 19px 0
+}
+
+h2 {
+    font-size: 28px;
+    line-height: 17px;
+    margin: 0;
+}
+
+h3 {
+    font-size: 22.42px;
+    margin: 0;
+    line-height: 14px;
+}
+
+h4 {
+    font-size: 20px;
+    margin: 0;
+    line-height: 24px;
+}
+
+subtitle {
+    font-size: 16px;
+    color: #8B8B8B;
+    line-height: 17px;
+}
+
+body {
+    margin: 0;
+
+}
+
+#app {
+    width: 600px;
+    height: 1161px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    border: 2px solid black;
+    border-radius: 20Px;
+    overflow: hidden;
+    margin: 2rem auto;
+}
+
+header {
+    width: 100%;
+    height: 167px;
+    background: url('/images/burger.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 46px;
+    margin: 0;
+}
+
+#content-wrapper {
+    padding: 0 46px;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+
+.item {
+    display: flex;
+    flex-direction: row;
+    padding: 51px 0;
+    width: 100%;
+    border-bottom: 1px solid #D2D2D2;
+    gap: 31px;
+}
+
+.emoji {
+    font-size: 79px;
+}
+
+.item-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.add-btn {
+    border: 1.5px solid #DEDEDE;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    background-color: white;
+    font-size: 32px;
+    font-family: 'Inter', sans-serif;
+    margin-left: auto;
+}
+
+#order {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 51px 0;
+    border-bottom: 1px solid #393333;
+    gap: 22px;
+}
+
+#order-title {
+    margin-bottom: 42px;
+}
+
+.order-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.order-item {
+    display: flex;
+    gap: 13px;
+}
+
+.remove-item-btn {
+    font-size: 12px;
+    line-height: 24px;
+    color: #BBBBBB;
+    background: none;
+    border: none;
+    font-family: "Verdana";
+}
+
+.order-item-price {
+    margin-left: auto;
+}
+
+/* Utility Classes */
+.hidden {
+    visibility: hidden;
+}
