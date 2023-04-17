@@ -71,7 +71,7 @@ header {
     padding: 0 46px;
 }
 
-#content {
+#menu-items {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -79,12 +79,10 @@ header {
 }
 
 .item {
-    display: flex;
-    flex-direction: row;
     padding: 51px 0;
-    width: 100%;
-    border-bottom: 1px solid #D2D2D2;
+    display: flex;
     gap: 31px;
+    border-bottom: 1px solid #D2D2D2;
 }
 
 .emoji {
@@ -147,7 +145,11 @@ header {
     margin-left: auto;
 }
 
+
+
 /* Utility Classes */
+
+
 .hidden {
     visibility: hidden;
 }
