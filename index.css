@@ -14,6 +14,7 @@ h2 {
     font-size: 28px;
     line-height: 17px;
     margin: 0;
+    padding: 0;
 }
 
 h3 {
@@ -31,7 +32,7 @@ h4 {
 subtitle {
     font-size: 16px;
     color: #8B8B8B;
-    line-height: 17px;
+    line-height: 24px;
 }
 
 body {
@@ -106,21 +107,26 @@ header {
     margin-left: auto;
 }
 
-#order {
+#order-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
     padding: 51px 0;
-    border-bottom: 1px solid #393333;
-    gap: 22px;
+
 }
 
 #order-title {
     margin-bottom: 42px;
 }
 
-.order-row {
+#order-items {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.order-items-row {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -129,7 +135,14 @@ header {
 
 .order-item {
     display: flex;
-    gap: 13px;
+    align-items: center;
+    gap: 10px;
+}
+
+hr {
+    border: 1px solid #393333;
+    width: 100%;
+    margin: 24px 0 20px;
 }
 
 .remove-item-btn {

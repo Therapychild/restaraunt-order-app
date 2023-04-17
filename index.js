@@ -1,4 +1,5 @@
 import { menuArray } from "./data.js";
+import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
 
 /* MENU SECTION */
 
@@ -27,7 +28,7 @@ document.getElementById('content').innerHTML = menuItems;
 
 /* ORDER SECTION */
 
-const orderSection = document.getElementById('order');
+const orderSection = document.getElementById('order-container');
 let orderItems = [];
 
 // handle the clicked item based on it's id;
@@ -38,6 +39,8 @@ document.addEventListener("click", function (e) {
     handleAddMenuItem(e.target.dataset.hamburger);
   } else if (e.target.dataset.beer) {
     handleAddMenuItem(e.target.dataset.beer);
+  } else if (e.target.dataset.uuid) {
+    handleRemoveMenuItem(e.target.dataset.uuid);
   }
 })
 
@@ -46,7 +49,19 @@ function handleAddMenuItem(itemId) {
     return +itemId === item.id;
   })[0];
 
-  orderItems.push(targetMenuItem);
+  orderItems.push({ ...targetMenuItem, uuid: uuidv4() });
+  renderOrder(orderItems);
+}
+
+function handleRemoveMenuItem(itemUUID) {
+  console.log(1, itemUUID);
+  console.log(1.5, orderItems);
+  const targetOrderItems = orderItems.filter(function (item) {
+    return item.uuid !== itemUUID;
+  })
+  console.log(2, targetOrderItems);
+
+  orderItems = targetOrderItems;
   renderOrder(orderItems);
 }
 
@@ -56,32 +71,31 @@ function showOrder() {
   }
 }
 
-
-
-// function removeItem(item) {
-
-// }
-
-// function renderItems() {
-
-// }
-
 function renderOrder(orderItems) {
   let completeOrder = ``;
+  let orderTotal = 0
   showOrder();
 
-  console.log(orderItems);
   orderItems.forEach(function (item) {
     completeOrder += `
-            <div class="order-row">
+            <div class="order-items-row">
                 <div class="order-item">
                     <h2>${item.name}</h2>
-                    <button class="remove-item-btn">remove</button>
+                    <button class="remove-item-btn" data-uuid="${item.uuid}">remove</button>
                 </div>
                 <h4>$ ${item.price}</h4>
             </div>
-        `
+        `;
+    orderTotal += +item.price;
   })
 
-  document.getElementById("order").innerHTML = completeOrder;
+  document.getElementById("order-items").innerHTML = completeOrder;
+  document.getElementById("order-total").innerHTML = `
+    <div class="order-items-row">
+        <div class="order-item">
+            <h2>Total Price:</h2>
+        </div>
+        <h4>$ ${orderTotal}</h4>
+    </div>
+  `
 }
