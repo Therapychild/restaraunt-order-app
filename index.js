@@ -132,14 +132,40 @@ function renderOrder(orderItems) {
   })
 
   document.getElementById("order-items").innerHTML = completeOrder;
-  document.getElementById("order-total").innerHTML = `
-    <div class="order-items-row">
-        <div class="order-item">
-            <h2>Total Price:</h2>
+  const pizza = orderItems.filter(item => item.name === "Pizza");
+  const hamburger = orderItems.filter(item => item.name === "Hamburger");
+  const beer = orderItems.filter(item => item.name === "Beer");
+  if (pizza.length && hamburger.length && beer.length) {
+    document.getElementById("order-total").innerHTML = `
+        <div class="order-items-row">
+            <div class="order-item">
+                <h2>Sub Total:</h2>
+            </div>
+            <h4>$ ${orderTotal}</h4>
         </div>
-        <h4>$ ${orderTotal}</h4>
-    </div>
-  `
+        <div class="order-items-row">
+            <div class="order-item">
+                <h2>Meal Discount (15%):</h2>
+            </div>
+            <h4>-$ ${(orderTotal * .15).toFixed(2)}</h4>
+        </div>
+        <div class="order-items-row">
+            <div class="order-item">
+                <h2>Total Price:</h2>
+            </div>
+            <h4>$ ${(orderTotal * .85).toFixed(2)}</h4>
+        </div>
+    `
+  } else {
+    document.getElementById("order-total").innerHTML = `
+        <div class="order-items-row">
+            <div class="order-item">
+                <h2>Total Price:</h2>
+            </div>
+            <h4>$ ${orderTotal}</h4>
+        </div>
+    `
+  }
 }
 
 // Produce an order form in a Dialog.
@@ -179,7 +205,6 @@ function renderStars(rate = 0) {
     }
 
   }
-  console.log(starsHtml);
 
   document.getElementById('rate').innerHTML = starsHtml;
 }

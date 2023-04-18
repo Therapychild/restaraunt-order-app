@@ -40,6 +40,10 @@ body {
     position: relative;
 }
 
+button {
+    cursor: pointer;
+}
+
 #app {
     width: 600px;
     min-height: 1161px;
@@ -160,6 +164,9 @@ hr {
 
 #order-total {
     margin-bottom: 53px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
 }
 
 .submit-btn {
@@ -248,6 +255,7 @@ hr {
     font-size: 200%;
     color:yellow;
     text-shadow: 0 0 2px black;
+    cursor: pointer;
 }
 
 
