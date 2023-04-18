@@ -39,10 +39,7 @@ function resetOrder() {
   addBeerBtn.removeAttribute('disabled');
 }
 
-let orderItems = [];
-
-// handle the clicked item based on it's id or dataset.
-document.addEventListener("click", function (e) {
+function setOrderInnerHtml() {
   if (!document.getElementById("order-title")) {
     orderSection.innerHTML = `
         <h2 id="order-title">Your Order</h2>
@@ -52,11 +49,21 @@ document.addEventListener("click", function (e) {
         <button id="place-order" class="submit-btn">Complete Order</button>
     `;
   }
+}
+
+let orderItems = [];
+
+
+// handle the clicked item based on it's id or dataset.
+document.addEventListener("click", function (e) {
   if (e.target.dataset.pizza) {
+    setOrderInnerHtml();
     handleAddMenuItem(e.target.dataset.pizza);
   } else if (e.target.dataset.hamburger) {
+    setOrderInnerHtml();
     handleAddMenuItem(e.target.dataset.hamburger);
   } else if (e.target.dataset.beer) {
+    setOrderInnerHtml();
     handleAddMenuItem(e.target.dataset.beer);
   } else if (e.target.dataset.uuid) {
     handleRemoveMenuItem(e.target.dataset.uuid);
@@ -66,9 +73,13 @@ document.addEventListener("click", function (e) {
       processOrder();
       e.preventDefault();
     })
-  }
-  else if (e.target.id === "reset-order-btn") {
+  } else if (e.target.id === "reset-order-btn") {
     resetOrder();
+  } else if (e.target.id === "cancel-btn") {
+    orderDialog.classList.add('hidden');
+    orderDialog.innerHTML = ``
+  } else if (e.target.id.includes('star')) {
+    renderStars(e.target.dataset.star);
   }
 })
 
@@ -138,6 +149,7 @@ let customerName = "";
 function renderOrderForm() {
   orderDialog.classList.remove('hidden');
   orderDialog.innerHTML = `
+      <button id="cancel-btn" type="button">X</button>
       <div id="order-dialog-title">Enter Card Details</div>
       <form id="order-form">
           <input id="name-input" required type="text" class="order-input" placeholder="Enter your name" />
@@ -148,6 +160,28 @@ function renderOrderForm() {
           <button id="pay-btn" type="submit" class="submit-btn">Pay</button>
       </form>
     `
+}
+
+function renderStars(rate = 0) {
+  let starsHtml = ``;
+
+  // First give me stars of the rate.
+
+  for (let i = 1; i <= 5; i++) {
+    if (i <= rate) {
+      starsHtml += `
+                <span id="star-${i}" class="star" data-star="${i}">&starf;</span>
+            `
+    } else {
+      starsHtml += `
+                <span id="star-${i}" class="star" data-star="${i}">&star;</span>
+            `
+    }
+
+  }
+  console.log(starsHtml);
+
+  document.getElementById('rate').innerHTML = starsHtml;
 }
 
 function processOrder() {
@@ -179,8 +213,9 @@ function processOrder() {
     return;
   }
 
-  // Submit data here
+  // Submit data here.
   customerName = document.getElementById('name-input').value;
+  // Reset order Items.
   orderItems = [];
 
   addPizzaBtn.setAttribute('disabled', true);
@@ -190,7 +225,13 @@ function processOrder() {
   // Close dialog, show thank you banner and reset the form.
   orderDialog.classList.add('hidden');
   orderSection.innerHTML = `
-        <div id="banner">Thanks, ${customerName}! Your order is on its way!</div>
-        <button id="reset-order-btn" class="submit-btn">Reset</button>
+        <div id="banner">
+            <div>Thanks, ${customerName}! Your order is on its way!</div>
+            <div>Please rate your visit!</div>
+            <div id="rate">
+            </div>
+        </div>
+        <button id="reset-order-btn" class="submit-btn">Submit</button>
     `;
+  renderStars();
 }
