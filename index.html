@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
 <html>
     <head>
         <link rel="stylesheet" href="index.css">
@@ -15,15 +17,12 @@
             <div id="content-wrapper">
                 <section id="content">
                 </section>
-                <section id="order-container" class="hidden">
-                    <h2 id="order-title">Your Order</h2>
-                    <div id="order-items"></div>
-                    <hr />
-                    <div id="order-total" class="order-items-row"></div>
-                    <button id="complete-order">Complete Order</button>
-                </section>
+                <section id="order-container" class="hidden"></section>
             </div>
         </div>
+        <dialog id="order-dialog" open class="hidden">
+            <div id="order-dialog-title">Enter Card Details</div>
+        </dialog>
 	<script src="index.js" type="module"></script>
     </body>
 </html>
